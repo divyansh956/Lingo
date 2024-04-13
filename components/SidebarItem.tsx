@@ -20,7 +20,7 @@ const SidebarItem = ({ label, iconSrc, href }: Props) => {
       className="justify-start h-[52px]"
       asChild
     >
-      <Link href="/learn">
+      <Link href={href}>
         <Image
           src={iconSrc}
           height={32}
