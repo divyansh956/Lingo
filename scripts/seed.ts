@@ -130,6 +130,30 @@ const main = async () => {
       },
     ]);
 
+    await db.insert(schema.challenges).values([
+      {
+        id: 4,
+        lessonId: 2,
+        type: "SELECT",
+        question: "What is the Hindi word for 'good evening'?",
+        order: 1,
+      },
+      {
+        id: 5,
+        lessonId: 2,
+        type: "ASSIST",
+        question: "What is the Hindi word for 'good night'?",
+        order: 2,
+      },
+      {
+        id: 6,
+        lessonId: 2,
+        type: "SELECT",
+        question: "What is the Hindi word for 'goodbye'?",
+        order: 3,
+      },
+    ]);
+
     // NO need of IDs for challengeOptions
     await db.insert(schema.challengeOptions).values([
       {
