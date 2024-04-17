@@ -21,7 +21,7 @@ const Header = ({ hasActiveSubscription, hearts, percentage }: Props) => {
       <Progress value={percentage} />
       <div className="text-rose-500 flex items-center font-bold">
         <Image
-          src="heart.svg"
+          src="/heart.svg"
           alt="Heart"
           height={28}
           width={28}

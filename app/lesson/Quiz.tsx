@@ -10,11 +10,12 @@ import Footer from "./Footer";
 import { upsertChallengeProgress } from "@/actions/challenge-progress";
 import { toast } from "sonner";
 import { reduceHearts } from "@/actions/user-progress";
-import { useAudio, useWindowSize } from "react-use";
+import { useAudio, useWindowSize, useMount } from "react-use";
 import Image from "next/image";
 import ResultCard from "./ResultCard";
 import { useRouter } from "next/navigation";
 import { useHeartsModal } from "@/store/use-heart-modal";
+import { usePracticeModal } from "@/store/use-practice-modal";
 
 type Props = {
   initialPercentage: number;
@@ -35,20 +36,30 @@ const Quiz = ({
   userSubscription,
 }: Props) => {
   const { open: openHeartsModal } = useHeartsModal();
+  const { open: openPracticeModal } = usePracticeModal();
+
+  useMount(() => {
+    if (initialPercentage === 100) {
+      openPracticeModal();
+    }
+  });
+
   const { height, width } = useWindowSize();
   const router = useRouter();
-  const [correctAudio, _c, correctControls] = useAudio({ src: "namaste.mp3" });
-  const [finishAudio] = useAudio({
-    src: "namaste.mp3",
+  const [correctAudio, _c, correctControls] = useAudio({ src: "/namaste.mp3" });
+  const [finishAudio, _, __] = useAudio({
+    src: "/namaste.mp3",
     autoPlay: true,
   });
   const [incorrectAudio, _i, incorrectControls] = useAudio({
-    src: "namaste.mp3",
+    src: "/namaste.mp3",
   });
   const [lessonId, setLessonId] = useState(initialLessonId);
   const [pending, startTransition] = useTransition();
   const [hearts, setHearts] = useState(initialHearts);
-  const [percentage, setPercentage] = useState(initialPercentage);
+  const [percentage, setPercentage] = useState(() => {
+    return initialPercentage === 100 ? 0 : initialPercentage;
+  });
   const [challenges, setChallenges] = useState(initialLessonChallenges);
   const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
   const [activeIndex, setActiveIndex] = useState(() => {

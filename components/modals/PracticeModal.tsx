@@ -1,6 +1,6 @@
 "use client";
 
-import { useExitModal } from "@/store/use-exit-modal";
+import { usePracticeModal } from "@/store/use-practice-modal";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
@@ -14,10 +14,10 @@ import {
 import Image from "next/image";
 import { Button } from "../ui/button";
 
-const ExitModal = () => {
+const PracticeModal = () => {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
-  const { isOpen, close } = useExitModal();
+  const { isOpen, close } = usePracticeModal();
 
   useEffect(() => {
     setIsClient(true);
@@ -32,13 +32,14 @@ const ExitModal = () => {
       <DialogContent className="max-w-md">
         <DialogHeader>
           <div className="flex items-center w-full justify-center mb-5">
-            <Image src="/logo.svg" width={80} height={80} alt="logo" />
+            <Image src="/heart.svg" width={80} height={80} alt="heart" />
           </div>
           <DialogTitle className="text-center font-bold">
-            Wait, don&apos;t go!
+            Practice Lesson
           </DialogTitle>
           <DialogDescription className="text-center text-base">
-            You&apos;re about to leave the lesson. Are you sure?
+            Use practice lessons to regain hearts and points. You cannot loose
+            hearts or points in practice lessons.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -49,18 +50,7 @@ const ExitModal = () => {
               className="w-full"
               onClick={close}
             >
-              Keep Learning
-            </Button>
-            <Button
-              variant="dangerOutline"
-              size="lg"
-              className="w-full"
-              onClick={() => {
-                close();
-                router.push("/learn");
-              }}
-            >
-              End Session
+              I understand
             </Button>
           </div>
         </DialogFooter>
@@ -69,4 +59,4 @@ const ExitModal = () => {
   );
 };
 
-export default ExitModal;
+export default PracticeModal;
