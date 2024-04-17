@@ -114,8 +114,23 @@ const main = async () => {
         question: "What is the Hindi word for 'hello'?",
         order: 1,
       },
+      {
+        id: 2,
+        lessonId: 1,
+        type: "ASSIST",
+        question: "What is the Hindi word for 'goodbye'?",
+        order: 2,
+      },
+      {
+        id: 3,
+        lessonId: 1,
+        type: "SELECT",
+        question: "What is the Hindi word for 'good morning'?",
+        order: 3,
+      },
     ]);
 
+    // NO need of IDs for challengeOptions
     await db.insert(schema.challengeOptions).values([
       {
         id: 1,
@@ -136,6 +151,57 @@ const main = async () => {
       {
         id: 3,
         challengeId: 1,
+        imageSrc: "next.svg",
+        text: "अलविदा",
+        correct: false,
+        audioSrc: "namaste.mp3",
+      },
+    ]);
+
+    await db.insert(schema.challengeOptions).values([
+      {
+        id: 4,
+        challengeId: 2,
+        text: "नमस्ते",
+        correct: false,
+        audioSrc: "namaste.mp3",
+      },
+      {
+        id: 5,
+        challengeId: 2,
+        text: "हाय",
+        correct: false,
+        audioSrc: "namaste.mp3",
+      },
+      {
+        id: 6,
+        challengeId: 2,
+        text: "अलविदा",
+        correct: true,
+        audioSrc: "namaste.mp3",
+      },
+    ]);
+
+    await db.insert(schema.challengeOptions).values([
+      {
+        id: 7,
+        challengeId: 3,
+        imageSrc: "next.svg",
+        text: "नमस्ते",
+        correct: false,
+        audioSrc: "namaste.mp3",
+      },
+      {
+        id: 8,
+        challengeId: 3,
+        imageSrc: "next.svg",
+        text: "सुप्रभात",
+        correct: true,
+        audioSrc: "namaste.mp3",
+      },
+      {
+        id: 9,
+        challengeId: 3,
         imageSrc: "next.svg",
         text: "अलविदा",
         correct: false,
