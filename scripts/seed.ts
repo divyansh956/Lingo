@@ -131,7 +131,7 @@ const main = async () => {
         imageSrc: "next.svg",
         text: "हाय",
         correct: false,
-        audioSrc: "hi.mp3",
+        audioSrc: "namaste.mp3",
       },
       {
         id: 3,
@@ -139,7 +139,7 @@ const main = async () => {
         imageSrc: "next.svg",
         text: "अलविदा",
         correct: false,
-        audioSrc: "goodbye.mp3",
+        audioSrc: "namaste.mp3",
       },
     ]);
 
