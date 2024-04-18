@@ -94,3 +94,38 @@ export const reduceHearts = async (challengeId: number) => {
   revalidatePath("/leaderboard");
   revalidatePath(`/lesson/${lessonId}`);
 };
+
+const POINTS_TO_REFILL_HEARTS = 10;
+
+export const refillHearts = async () => {
+  const { userId } = await auth();
+  if (!userId) {
+    throw new Error("User not found");
+  }
+
+  const currentUserProgress = await getUserProgress();
+
+  if (!currentUserProgress) {
+    throw new Error("User progress not found");
+  }
+
+  if (currentUserProgress.hearts === 5) {
+    throw new Error("Hearts are full");
+  }
+
+  if (currentUserProgress.points < POINTS_TO_REFILL_HEARTS) {
+    throw new Error("Not enough points");
+  }
+
+  await db
+    .update(userProgress)
+    .set({
+      hearts: 5,
+      points: currentUserProgress.points - POINTS_TO_REFILL_HEARTS,
+    })
+    .where(eq(userProgress.userId, userId));
+  revalidatePath("/shop");
+  revalidatePath("/learn");
+  revalidatePath("/quests");
+  revalidatePath("/leaderboard");
+};
